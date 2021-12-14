@@ -21,8 +21,10 @@ const Landing: React.FC = () => {
 
       <h1 className='application-Name'> Brandon Routes V.0.01 </h1>
 
-      <User />
-      <GPS />
+
+
+          <GPS />
+
 
     </div>
   )
