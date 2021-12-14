@@ -5,38 +5,49 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import './GPSS.scss'
 
 
+interface IProps {
 
-const GPS = () => {
 
-  const mapContainer = useRef(null)  as any;
-  const map = useRef(null) as any;
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
+}
+
+
+
+const useMap = () => {
+
+  const mapContainer = useRef<any>(null);
+  const map = useRef<any>(null);
+  const [lng, setLng] = useState<number>(-70.9);
+  const [lat, setLat] = useState<number>(42.35);
+  const [zoom, setZoom] = useState<number>(9);
 
 
     useEffect(() => {
       if (map.current) return; // initialize map only once
-      async function test() {
+      async function mapReq() {
         mapboxgl.accessToken = mapBoxToken;
-        map.current = new mapboxgl.Map({
+        map.current = await new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/streets-v11',
           center: [lng, lat],
           zoom: zoom
         });
       }
-      test();
-      console.log(map.current)
-    });
+      mapReq();
+    },[]);
+
+  return mapContainer
+}
 
 
 
+const GPS = () => {
+
+  const map = useMap();
 
   return (
     <div>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <div ref={mapContainer} className="map-container"/>
+      <div ref={map} className="map-container"/>
     </div>
   );
 
