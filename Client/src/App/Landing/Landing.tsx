@@ -18,13 +18,14 @@ const Landing: React.FC = () => {
 
   return (
     <div className='landing-Page'>
+     <h1 className='application-Name'> Brandon Routes V.0.01 </h1>
+      <div className="user">
+          <User/>
+      </div>
 
-      <h1 className='application-Name'> Brandon Routes V.0.01 </h1>
-
-
-
+      <div className="gps-map">
           <GPS />
-
+      </div>
 
     </div>
   )

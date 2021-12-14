@@ -1,9 +1,7 @@
-
 import React, {useState} from 'react';
-
+import './UserS.scss'
 
 const useLogin = () => {
-
 
   const [tokenAuth, setTokenAuth] = useState<boolean>(false)
 
@@ -15,7 +13,6 @@ const useLogin = () => {
 }
 
 
-
 const User = () =>{
 
   const [userID, setUserID] = useState<string>('')
@@ -23,7 +20,9 @@ const User = () =>{
 
   return (
     <div>
-      User Profile
+      <img
+      src="https://i.redd.it/ztsp15mljc861.jpg"
+      className="user-profile-image"/>
     </div>
   )
 

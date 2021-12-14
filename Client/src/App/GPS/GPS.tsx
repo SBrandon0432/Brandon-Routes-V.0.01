@@ -39,7 +39,6 @@ const useMap = () => {
 }
 
 
-
 const GPS = () => {
 
   const map = useMap();
