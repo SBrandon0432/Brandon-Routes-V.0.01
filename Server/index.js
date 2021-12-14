@@ -9,6 +9,19 @@ app.use(express.static(path.resolve("Client", "dist")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+
+
+app.get('/login', (req, res) => {
+
+
+
+});
+
+
+
+
+
 app.listen(port, ()=> {
   console.log(`https://localHost${port}`)
 });
