@@ -7,10 +7,15 @@ import './GPSS.scss'
 
 interface IProps {
 
+  // mapContainer?: any;
+  // map?: any;
+  // lng: number;
+  // lat: number;
+  // zoom: number;
 
 }
 
-
+// HTMLDivElement
 
 const useMap = () => {
 
@@ -22,31 +27,42 @@ const useMap = () => {
 
 
     useEffect(() => {
-      if (map.current) return; // initialize map only once
+      if (map.current) return;
       async function mapReq() {
         mapboxgl.accessToken = mapBoxToken;
-        map.current = await new mapboxgl.Map({
+        map.current = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/streets-v11',
           center: [lng, lat],
           zoom: zoom
         });
+
+
       }
       mapReq();
+      map.current.addControl( new mapboxgl.GeolocateControl({
+        positionOptions: {
+        enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true
+        }))
+
     },[]);
 
-  return mapContainer
+  return {mapContainer, map}
 }
 
 
-const GPS = () => {
+const GPS: React.FC = () => {
 
-  const map = useMap();
+  const {mapContainer, map} = useMap();
+
 
   return (
     <div>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <div ref={map} className="map-container"/>
+      <div ref={mapContainer} className="map-container"/>
     </div>
   );
 
