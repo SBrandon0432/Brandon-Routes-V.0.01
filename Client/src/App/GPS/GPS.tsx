@@ -3,15 +3,10 @@ import mapBoxToken  from '../../../../tokens'
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './GPSS.scss'
+import MapboxDirections from '@mapbox/';
 
 
 interface IProps {
-
-  // mapContainer?: any;
-  // map?: any;
-  // lng: number;
-  // lat: number;
-  // zoom: number;
 
 }
 
@@ -41,7 +36,6 @@ const useMap = () => {
       }
       mapReq();
 
-
       map.current.addControl(new mapboxgl.NavigationControl());
       map.current.addControl( new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -52,6 +46,9 @@ const useMap = () => {
         }))
 
         map.current.addControl(new mapboxgl.FullscreenControl({container: document.getElementById('root')}));
+        map.current.addControl(new mapboxgl   ({ accessToken: mapBoxToken}), 'top-left'  );
+        // MapboxDirections
+
 
     },[]);
 
