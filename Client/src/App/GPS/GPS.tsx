@@ -40,6 +40,9 @@ const useMap = () => {
 
       }
       mapReq();
+
+
+      map.current.addControl(new mapboxgl.NavigationControl());
       map.current.addControl( new mapboxgl.GeolocateControl({
         positionOptions: {
         enableHighAccuracy: true
@@ -47,6 +50,8 @@ const useMap = () => {
         trackUserLocation: true,
         showUserHeading: true
         }))
+
+        map.current.addControl(new mapboxgl.FullscreenControl({container: document.getElementById('root')}));
 
     },[]);
 
