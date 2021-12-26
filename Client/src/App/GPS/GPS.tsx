@@ -116,68 +116,49 @@ const useMap = () => {
           geojson: geojson
         });
 
-        console.log(geojson)
+        // console.log(geojson)
       }
      getGpsDirection();
 
   },[])
 
-  // map.current.on('load', ()=> {
-
-  //   map.current.addLayer({
-  //     id: 'route',
-  //     type: 'line',
-  //     source: {
-  //       type: 'geojson',
-  //       data: result.geojson
-  //     },
-
-  //     layout: {
-  //       'line-join': 'round',
-  //       'line-cap': 'round'
-  //     },
-
-  //     paint: {
-  //       'line-color': '#3887be',
-  //       'line-width': 5,
-  //       'line-opacity': 0.75
-  //     }});
-
-  // });
-
   return { mapContainer, map, result }
-}
 
+}
 
 const GPS: React.FC = () => {
 
   const {mapContainer, map, result} = useMap();
 
   if (map.current) {
-    map.current.on('load', ()=> {
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: {
-          type: 'geojson',
-          data: result.geojson
-        },
+    if (map.current.getSource('route')) {
+      // console.log(map.current.getSource('route'), 'here' )
+      map.current.getSource('route').setData(result.data);
+    } else {
+      map.current.on('load', ()=> {
+          console.log(map.current.getSource('route'), 'herewwww ' )
+          map.current.addLayer({
+            id: 'route',
+            type: 'line',
+            source: {
+              type: 'geojson',
+              data: result.data
+            },
 
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round'
+            },
 
-        paint: {
-          'line-color': '#3887be',
-          'line-width': 5,
-          'line-opacity': 0.75
-        }});
+            paint: {
+              'line-color': '#3887be',
+              'line-width': 5,
+              'line-opacity': 0.75
+            }});//
 
-    });
+        });
+    }
   }
-
-
   return (
     <div>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
